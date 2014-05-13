@@ -13,6 +13,7 @@ public class CommandConstants {
 	
 	// attribute names
 	public static final String ATTR_USER_NAME = "UserName";
+	public static final String ATTR_PASSWORD = "Password";
 	public static final String ATTR_IP = "IP";
 	public static final String ATTR_SUCCESS = "Success";
 	public static final String ATTR_USER_ID = "UserID";

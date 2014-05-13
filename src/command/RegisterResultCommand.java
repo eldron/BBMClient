@@ -16,6 +16,7 @@ public class RegisterResultCommand extends ICommand {
 	@Override
 	public void act() {
 		// TODO Auto-generated method stub
+		// returns user id if successful, returns -1 if not
 		StateManager.getManager().getCurrantHandler().obtainMessage(HandlerConstants.REGISTER_RESULT, userID).sendToTarget();
 	}
 

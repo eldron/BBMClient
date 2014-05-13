@@ -13,17 +13,20 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private Socket sock;
-	private WakeLock wakeLock;
+	
+	//private WakeLock wakeLock;
 	
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        wakeLock = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "VideoReceiverMainActivity");
+        
+        //wakeLock = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "VideoReceiverMainActivity");
 		sock = null;
 		new Thread(){
 			public void run(){
@@ -50,13 +53,13 @@ public class MainActivity extends Activity {
     
     protected void onResume(){
 		super.onResume();
-		wakeLock.acquire();
+		//wakeLock.acquire();
 		StateManager.getManager().setCurrentHandler(handler);
 	}
 	
 	protected void onPause(){
 		super.onPause();
-		wakeLock.release();
+		//wakeLock.release();
 	}
 	
 	protected void onDestroy(){
@@ -75,9 +78,8 @@ public class MainActivity extends Activity {
 	private Handler handler = new Handler(){
 		public void handleMessage(Message msg){
 			if(msg.what == 1){
-				// connected to chat server, launch login activity
-				startActivity(new Intent(MainActivity.this, LogInActivity.class));
 				Toast.makeText(MainActivity.this, "Connected to server!", Toast.LENGTH_LONG);
+				startActivity(new Intent(MainActivity.this, LoginActivity.class));
 			} else {
 				// failed connecting to server
 				Toast.makeText(MainActivity.this, "Failed connecting to server!", Toast.LENGTH_LONG).show();
